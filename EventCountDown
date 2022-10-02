@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Count Down Time</title>
+    <meta charset="UTF-8" />
+    <style>
+      h1 {
+        width: 300px;
+        height: 100px;
+        margin: auto;
+        text-align: center;
+        line-height: 100px;
+        border-radius: 30px;
+        border: 2px solid #333333;
+        background-color: red;
+        position: relative;
+        animation: animate 5s ease 0s infinite normal none;
+      }
+      @keyframes animate {
+        0% {
+          background-color: aqua;
+        }
+        25% {
+          background-color: blueviolet;
+        }
+        50% {
+          background-color: chocolate;
+        }
+        75% {
+          background-color: darkgoldenrod;
+        }
+        100% {
+          background-color: aqua;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <h1 id="time"></h1>
+    <script>
+      let displayTime = document.getElementById("time");
+      let eventTime = new Date("Nov, 2022 12:37:25").getTime();
+      let x = setInterval(() => {
+        let currentTime = new Date().getTime();
+        let time = eventTime - currentTime;
+        let days = Math.floor(time / (1000 * 60 * 60 * 24));
+        let hours = Math.floor(
+          (time % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
+        );
+        let minutes = Math.floor((time % (1000 * 60 * 60)) / (1000 * 60));
+        let seconds = Math.floor((time % (1000 * 60)) / 1000);
+
+        displayTime.innerHTML =
+          days + "d " + hours + "h " + minutes + "m " + seconds + "s";
+
+        if (time <= 0) {
+          clearInterval(x);
+          displayTime.innerHTML =
+            "Event has arrived and it is started from now.";
+        }
+      }, 1000);
+    </script>
+  </body>
+</html>
